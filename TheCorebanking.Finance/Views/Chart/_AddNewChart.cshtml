@@ -1,0 +1,276 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblChartOfAccount
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">Chart of Account</small></h4>
+    </div>
+
+    <div class="card-body">
+
+
+        <div id="charts-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnNewCharts" data-toggle="modal" data-target="#AddNewsChart" type="button" value="Add Chart">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add Chart
+                </button>
+
+            </div>
+            <div class="form-group text-right">
+                <input type="file" class="file btn btn-danger" id="btnUploadChart" />
+                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                Upload Chart
+            </div>
+            </div>
+            <table id="newchartTable" data-toggle="table" class="data-table"
+                   data-url="@Url.Action("listnewchart", "chart")"
+                   data-search="true"
+                   data-search-align="right"
+                   data-show-export="true"
+                   data-toolbar="#charts-toolbar"
+                   data-mobile-responsive="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-detail-formatter="detailFormatter"
+                   data-page-list="[5,10,25,50,100,150,200,250,300]"
+                   data-page-size="25"
+                   data-check-on-init="true"
+                   data-pagination="true"
+                   data-buttons-class="danger">
+                <thead>
+                    <tr>
+                        <th data-field="accountName" data-align="left"><b>Account Name</b></th>
+                        <th data-field="accountId" data-align="left"><b>Account</b></th>
+                        <th data-field="isParentGl" data-align="left"><b>Is Parent GL</b></th>
+                        <th data-field="createdBy" data-align="left" data-visible="false">username</th>
+                        <th data-field="coyId" data-align="left" data-visible="false">Company</th>
+                        <th data-field="dateCreated" data-align="left" data-visible="false">Date Created</th>
+                        @*<th data-field="" data-align="left" data-events="newchartEvents" data-width="-5%" data-formatter="newchartFormatter">  </th>*@
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+</div>
+
+    <div id="AddNewsChart" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                    <h7 class="modal-title"> CHART OF ACCOUNT</h7>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="CreateChartOfAccount" id="frmnewchart">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#chart" aria-expanded="true" aria-controls="chart">
+                                        Chart of Account
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="chart" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input asp-for="Id" class="form-control" type="hidden" />
+                                            <input asp-for="BranchSpecific" class="form-control" type="hidden" />
+                                            <input asp-for="DateCreated" class="form-control" type="hidden" />
+                                            <input asp-for="CompanyId" class="form-control" type="hidden" />
+                                            <input asp-for="CreatedBy" class="form-control" type="hidden" />
+                                        </div>
+                               
+                                        <div class="row">
+
+                                            <div class="form-group col-md-6">
+                                                Account Type
+                                                <select id="acctType" name="acctType" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Account Type...</option>
+                                                </select>
+                                                <span asp-validation-for="AccountTypeId" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                Product Group
+                                                <select id="ddlProduct" name="ddlProduct" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Product...</option>
+                                                </select>
+
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="form-group col-md-6">
+                                                Currency
+                                                <select id="ddlCurrencyNew" data-bind="CurrencyId" name="ddlCurrencyNew" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Currency...</option>
+                                                </select>
+                                                @*<input  disabled class="form-control" id="ddlAcctCurrency" />*@
+                                                <span asp-validation-for="CurrencyId" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                Level
+                                                <select id="GLLevel" name="GLLevel" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Level...</option>
+                                                </select>
+
+                                            </div>
+                                           
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                Account Name
+                                                <input asp-for="AccountName" id="AccountsName" class="form-control" required />
+                                                <span asp-validation-for="AccountName" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+
+
+                                                <label class="col-md-2 col-form-label"></label>
+                                                <div class="col-md-10 mb-3">
+                                                    <div class="form-check pl-0">
+                                                        <label class="form-check-label">
+                                                            <input name="isGL" id="isGL"
+                                                                   class="form-check-input" type="checkbox" disabled>
+                                                            <span class="form-check-sign"></span>is Parent GL
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="form-group col-md-12">
+                                                Parent GL
+                                                <select id="ParentGL" name="ParentGL" class="form-control" disabled>
+                                                    <option disabled value="" selected hidden>Select Parent GL...</option>
+                                                </select>
+                                            
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @*GL Number*@
+                                                <input asp-for="AccountId" data-bind="AccountId" class="form-control" hidden />
+                                                <span asp-validation-for="AccountId" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
+                                        <hr />
+                                        <div class="form-group text-right">
+
+                                            <button class="btn btn-info" id="btnNewChart" type="submit" value="Save Record">
+                                                <i class="now-ui-icons ui-1_check"></i>
+                                                Save Record
+                                            </button>
+                                            <button class="btn btn-danger" type="reset">
+                                                <i class="fa fa-recycle"></i>
+                                                Clear
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="UpdateNewChart" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                    <h7 class="modal-title">UPDATE NEW CHART </h7>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="AddChart" id="frmcharts">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                            <div class="card card-plain">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#charts" aria-expanded="true" aria-controls="charts">
+                                        Chart of Account
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </a>
+                                </div>
+                                <div id="charts" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input asp-for="Id" class="form-control" type="hidden" />
+                                            <input asp-for="BranchSpecific" class="form-control" type="hidden" />
+                                            <input asp-for="DateCreated" class="form-control" type="hidden" />
+                                            <input asp-for="CompanyId" class="form-control" type="hidden" />
+                                            <input asp-for="CreatedBy" class="form-control" type="hidden" />
+                                        </div>
+                                       
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                Account Name
+                                                <select id="ddlAName" name="ddlAName" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Account Name...</option>
+                                                </select>
+                                                <span asp-validation-for="AccountName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                Account Number
+                                                <input asp-for="AccountId" id="AccountId" data-bind="AccountId" class="form-control" required />
+                                                <span asp-validation-for="AccountId" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                Account Type
+                                                <select id="ddlAccount" name="ddlAccount" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select Account Type...</option>
+                                                </select>
+                                                <span asp-validation-for="AccountTypeId" class="text-danger"></span>
+                                            </div>                                          
+
+                                        </div>
+                                       
+                                        <div class="row">
+                                        
+                                            <div class="form-group col-md-12">
+                                                New Account Name
+                                                <input type="text" class="form-control" asp-for="AccountName" />
+                                            </div>
+
+                                        </div>
+                                        <hr />
+                                        <div class="form-group text-right">
+                                            <button class="btn btn-info" id="btnChartUpdate" type="submit" value="Update Record">
+                                                <i class="now-ui-icons ui-1_check"></i>
+                                                Update Record
+                                            </button>                                     
+
+                                            <button class="btn btn-danger" type="reset">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                Clear
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+

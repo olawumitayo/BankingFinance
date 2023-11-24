@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Approve FundTransfer";
+}
+
+<div class="card-body">
+    <div class="card card-body">
+
+        <table id="roleTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("AccountList", "fundTransfer")"
+               data-search="true"
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"
+               data-check-on-init="true"               
+               data-pagination="true"
+               data-search-align="right"
+               data-toolbar="#role-toolbar"               
+               data-show-pagination-switch="true"
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <th data-field="accountDr">Originator Acct No</th>
+                    <th data-field="amount">Amount</th>
+                    <th data-field="postDate" data-formatter="dateFormatter">Date Posted</th>
+                    <th data-field="accountCr">Beneficiary Acct</th>
+                    <th data-field="remark">Status</th>
+                    <th data-field="" data-align="right" data-events="glEvents" data-formatter="Formatter">  </th>
+                </tr>
+            </thead>
+        </table>
+
+
+    </div>
+
+</div>
+@section Scripts {
+
+    <script src="~/js/singleTransfer.js"></script>
+
+
+}

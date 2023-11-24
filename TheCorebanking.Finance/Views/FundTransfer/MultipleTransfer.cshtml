@@ -1,0 +1,414 @@
+﻿
+@{
+    ViewData["Title"] = "MULTILPLE LEDGER";
+}
+@section title{
+    @ViewData["Title"]
+}
+
+@section pagedescription{
+    <h5> MULTILPLE TRANSFER OPERATION </h5>
+
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category text-center">MULTIPLE LEDGER- TRANSACTION DETAILS</h5>
+                    @*<h5 class="card-title">SINGLE FUND TRANSFER</h5>*@
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Statusr</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#department">Transaction History</a>
+                            @*<a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item text-danger" href="#">Remove Data</a>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Temptransfer" id="multipleTransfer">
+                        <strong>DEBIT ACCOUNT DETAILS</strong>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                Use  existing batch:
+                                <select id="ddlBatch" name="ddlBatch" class="form-control">
+                                    <option value="" selected hidden>Select Batch Ref ...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="Id" type="text" hidden />
+                                <label> Operation Type:</label>
+                                <br />
+                                <select id="ddlOperationType" name="ddlOperationType" class="form-control" required>
+                                    <option value="" selected hidden>Select Operation Type ...</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Account No/Name:@ViewBag.alert</label>
+                                    <br />
+                                    <select id="ddlCustomerAccount" name="ddlCustomerAccount" class="form-control" required>
+                                        <option value="" selected hidden>Enter Account No/Name ...</option>
+                                    </select>
+                                    @*<button id="btnRefresh" type="button">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </button>*@
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account Name:</label>
+                                    <input type="text" class="form-control" required id="Accountname" placeholder="Account Name" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account No.:</label>
+                                    <input type="text" class="form-control" required id="Accountnumber" placeholder="Account No" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Current Balance(&#8358;)</label>
+                                    <input type="text" class="form-control  text-right" style="color:green;font-weight:bold" required id="availablebalance" placeholder="0.00" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Product:</label>
+                                    <input type="text" class="form-control" id="operationid" placeholder="Product">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Amount Transfer(&#8358;)</label>
+                                    <input type="number" id="Amount" required class="form-control text-right" style="color:green;font-weight:bold" placeholder="0.00" autofocus>
+                                </div>
+                            </div>
+                            @*autocomplete="formatnumber(value)"*@
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Value Date:</label>
+                                    <div class='input-group date'>
+                                        <input type="text" id="Transactiondate" class="form-control" required placeholder="Trans.Date">
+                                        <span class="input-group-addon">
+                                            @*<span class="fa fa-calendar"></span>*@
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Transaction Type:</label>
+                                    <input type="text" id="TransactionType" class="form-control" required placeholder="Trans.Type">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Narration</label>
+                                    <textarea rows="4" cols="80" id="NarrationDr" required class="form-control" placeholder="Here can be your description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <strong>CREDIT ACCOUNT DETAILS</strong>
+                        <hr />
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Account No/Name:</label>
+                                    <br />
+                                    <select id="ddlAcct" name="ddlAcct" class="form-control" required>
+                                        <option value="" selected hidden>Enter Account No/Name ...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account Name:</label>
+                                    <input type="text" id="AccountNameCr" required class="form-control" placeholder="Account Name" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account No.:</label>
+                                    <input type="text" id="AccountNoCr" required class="form-control" placeholder="Account No" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Current Balance(&#8358;)</label>
+                                    <input type="text" id="BalanceCr" style="color:green;font-weight:bold" required class="form-control text-right" placeholder="0.00" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Product:</label>
+                                    <input type="text" id="ProductCr" required class="form-control text-right" placeholder="Product">
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Amount Received(&#8358;) </label>
+                                    <input type="number" id="AmountCr" style="color:green;font-weight:bold" required class="form-control" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Narration</label>
+                                    <textarea rows="4" required id="NarrationCr" cols="80" class="form-control" placeholder="Here can be your description"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-md-2 col-form-label"></label>
+                                <div class="col-md-10 mb-3">
+                                    <div class="form-check pl-0">
+                                        <label class="form-check-label">
+                                            <input name="stampduty" id="stampduty"
+                                                   class="form-check-input" type="checkbox">
+                                            <span class="form-check-sign"></span> Stamp Duty
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group text-right">
+                                    <button class="btn btn-info" id="btnAddFinish" type="submit" value="Save Record">
+                                        <i class="now-ui-icons ui-1_check"></i>
+                                        Add New
+                                    </button>
+
+
+                                    <button class="btn btn-danger" type="reset">
+                                        <i class="fa fa-recycle"></i>
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr/>
+                        <div id="temp-toolbar" class="col-md-2">
+                            <button class="btn btn-info" id="btnAddAll"
+                                    type="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="now-ui-icons ui-1_send"></i>
+                                Transfer All
+                            </button>
+                        </div>
+                        <div class="row col-md-offset-10">
+                            <div class="col-md-3 ">
+                                <input type="text" class="form-control  text-right" id="TotalDebit" disabled placeholder="Debit Amount">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="TotalCredit" class="form-control text-right" placeholder="Credit Amount">
+                            </div>
+                        </div>
+                        <table id="tempTable" data-toggle="table" class="data-table"
+                               data-url="@Url.Action("listmultipleTemp", "fundTransfer")"
+                               data-search="true"
+                               data-show-export="true"
+                               data-minimum-count-columns="2"
+                               data-pagination="true"
+                               data-toolbar="#temp-toolbar"
+                               data-mobile-responsive="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-checkbox-header="true"
+                               data-detail-formatter="detailFormatter"
+                               data-buttons-class="danger">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="reference" data-sortable="true"><b>Reference</b></th>
+                                    <th data-field="accountNo"><b>Account</b></th>
+                                    <th data-field="amount"><b>Amount</b></th>
+                                    <th data-field="dateCreated" data-formatter="dateFormatter" data-sortable="true"><b>Date</b></th>
+                                    <th data-field="" data-events="multipleAllEvents" data-formatter="multipleAllFormatter">  </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="card card-body">
+                            <table id="multipleTable" data-toggle="table" class="data-table"
+                                   data-search="true"
+                                   data-show-export="true"
+                                   data-check-on-init="true"
+                                   data-minimum-count-columns="2"
+                                   data-pagination="true"
+                                   data-page-list="[10, 25, 50, 100, ALL]"
+                                   data-toolbar="#custom-toolbar"
+                                   data-mobile-responsive="true"
+                                   data-show-refresh="true"
+                                   data-show-toggle="true"
+                                   data-show-columns="true"
+                                   data-detail-formatter="detailFormatter"                                   
+                                   data-buttons-class="danger">
+                            </table>
+
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="modal fade" data-backdrop="static" data-keyboard="false"
+     id="amountUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="">
+                    <h4 class="text-primary font-weight-bold mb-2 col-md-offset-3">
+                        Beneficiary Account <input type="text" class="text-primary" id="sessionId" disabled />
+                    </h4>
+
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="card shadow-none">
+                                <form id="frmAmountUpdate">
+                                    <input type="text" id="id" hidden />
+                                    <input type="hidden" name="customerid" />
+                                    <div class="row mb-2 required">
+                                        <label class="col-md-4 col-form-label">Amount Cr.</label>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input name="amount" id="AmountsUpCr" required class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 justify-content-between">
+                                        <div class="col">
+                                            <button type="button" class="btn btn-danger btn-wd pull-left">
+                                                <i class="fa fa-recycle"></i>
+                                                CANCEL
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" id="updateBtn"
+                                                    class="btn btn-info btn-wd pull-right">
+                                                UPDATE
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="department" tabindex="-1" role="dialog" aria-labelledby="departmentLabel" aria-hidden="true" data-backdrop="false" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="departmentLabel">Transactions Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="collapseBoard">
+
+                <div class="card card-body">
+
+                    <table id="roleTable" data-toggle="table" class="data-table"
+                           data-url="@Url.Action("AccountList", "fundTransfer")"
+                           data-search="true"
+                           data-page-list="[5,10,25,50,100,150,200,250,300]"
+                           data-page-size="25"
+                           data-check-on-init="true"
+                           data-pagination="true"
+                           data-search-align="right"
+                           data-toolbar="#role-toolbar"
+                           data-show-pagination-switch="true"
+                           data-mobile-responsive="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-buttons-class="danger">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="accountDr">Originator Acct No</th>
+                                <th data-field="amount">Amount</th>
+                                <th data-field="postDate" data-formatter="dateFormatter">Date Posted</th>
+                                <th data-field="accountCr">Beneficiary Acct</th>
+                                <th data-field="remark">Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/js/multitransfer.js"></script>
+
+
+}
+
+
+
+
+
+

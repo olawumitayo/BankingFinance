@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "General Setup";
+}
+@section title{
+    @ViewData["Title"]
+}
+
+@section pagedescription{
+    <h5> The Caption setup is happening here. </h5>
+
+}
+
+<div class="card ">
+
+    <div class="card-header text-center">
+        <h4 class="card-title">CAPTION SETUP </h4>
+    </div>
+
+    <div class="card-body ">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <!--
+                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                -->
+                <ul class="nav nav-pills nav-pills-danger nav-pills-icons flex-column" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#sub" role="tablist">
+                            <i class="now-ui-icons business_bank"></i>
+                            Sub Caption
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#main" role="tablist">
+                            <i class="now-ui-icons business_briefcase-24"></i>
+                            Main Caption
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="sub">
+                        @Html.Partial("_AddSub")
+                    </div>
+                    <div class="tab-pane" id="main">
+                        @Html.Partial("_AddMain")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+@section Scripts {
+
+    <script src="~/js/subcaption.js"></script>
+
+    <script src="~/js/maincaption.js"></script>
+}
+
+
+
+

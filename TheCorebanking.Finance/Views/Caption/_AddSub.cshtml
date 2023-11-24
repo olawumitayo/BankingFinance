@@ -1,0 +1,208 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblFinanceAccountSub
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">Sub Caption</small></h4>
+    </div>
+
+    <div class="card-body">
+        <div id="sub-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnSubs" data-toggle="modal" data-target="#AddNewSub" type="button" value="Add Sub">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add Sub Caption
+                </button>
+            </div>
+            <div class="form-group text-right">
+                <input type="file" class="file btn btn-danger" id="btnUploadSub" />
+                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                Upload Sub
+            </div>
+        </div>
+        <table id="subTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listSubCaption", "caption")" 
+               data-search="true"
+               data-show-export="true"
+               data-search-align="right"
+               data-toolbar="#sub-toolbar"               
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true" 
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"            
+               data-check-on-init="true" 
+               data-pagination="true"
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    <th data-field="id" data-visible="false">ID</th>
+                    <th data-field="accountSubName" data-sortable="true"><b>Description</b></th>
+                    <th data-field="currency" data-sortable="true"><b>Currency</b></th>
+                    <th data-field="" data-align="right" data-events="subEvents" data-formatter="subFormatter">  </th>
+                </tr>
+            </thead>
+        </table>
+
+
+
+    </div>
+
+</div>
+<div id="AddNewSub" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">ADD NEW SUB CAPTION </h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddSub" id="frmsub">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#subs" aria-expanded="true" aria-controls="sub">
+                                    Sub Caption
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="subs" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="Id" class="form-control" type="hidden" />
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            Description
+                                            <input asp-for="AccountSubName" class="form-control" required />
+                                            <span asp-validation-for="AccountSubName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Account Status
+                                            <select id="ddlStatuss" name="ddlStatuss" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Status...</option>
+                                            </select>
+                                            <span asp-validation-for="AccountStatus" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                   
+                                        <div class="form-group col-md-12">
+                                            Currency
+                                            <select id="ddlCurrencys" name="ddlCurrencys" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Currency...</option>
+                                            </select>
+                                            <span asp-validation-for="Currency" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="form-group text-right">
+                                       
+
+                                        <button class="btn btn-info" id="btnSub" type="submit" value="Save Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Save Record
+                                        </button>
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="fa fa-recycle"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+
+    </div>
+</div>
+
+
+<div id="UpdateSub" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">UPDATE SUB CAPTION </h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="UpdateSub" id="frmUpdatesub">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#subs" aria-expanded="true" aria-controls="sub">
+                                    Sub Caption
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="subs" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input id="IdUpdate" class="form-control" type="hidden" />
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            Description
+                                            <input id="AccountSubNameUpdate" class="form-control" required />
+                                           
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Account Status
+                                            <select id="ddlStatussUpdate" name="ddlStatussUpdate" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Status...</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="form-group col-md-12">
+                                            Currency
+                                            <select id="ddlCurrencysUpdate" name="ddlCurrencys" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Currency...</option>
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-info" id="btnSubUpdate" type="submit" value="Update Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Update Record
+                                        </button>                                    
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    
+

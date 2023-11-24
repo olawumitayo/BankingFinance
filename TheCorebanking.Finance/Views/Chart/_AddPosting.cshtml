@@ -1,0 +1,153 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblFinanceDefaultAccounts
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">Default Accounts</small></h4>
+    </div>
+
+    <div class="card-body">
+
+
+        <div id="default-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnDefaults" data-toggle="modal" data-target="#AddNewDefault" type="button" value="Add Default">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add Default Account
+                </button>
+            </div>
+            <div class="form-group text-right">
+                <input type="file" class="file btn btn-danger" id="btnUploadBank" />
+                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                Upload Default Account
+            </div>
+        </div>
+        <table id="defaultTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listdefault", "chart")"
+               data-search="true"
+               data-search-align="right"
+               data-show-export="true"
+               data-toolbar="#default-toolbar"
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"            
+               data-check-on-init="true" 
+               data-pagination="true"
+              
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+                data-detail-formatter="detailFormatter"
+              
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    @*<th data-field="accountID" data-visible="false"><b>Account ID</b></th>*@
+                    <th data-field="accountName" data-align="left"><b>Account Name</b></th>
+                    <th data-field="accountId" data-align="left"><b>Account Number </b></th>                   
+                    <th data-field="" data-events="defaultEvents" data-formatter="defaultFormatter">  </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+<div id="AddNewDefault" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">DEFAULT ACCOUNT </h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddDefault" id="frmdefault">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#default" aria-expanded="true" aria-controls="default">
+                                    Default of Accounts
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="default" class="collapse show " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="DfId" class="form-control" type="hidden" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Bank Name
+                                            <select id="ddlAccountName" name="ddlAccountName" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Account Name...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Account Number
+                                            <input asp-for="AccountId" id="ddlAcctNumber" class="form-control" required />
+                                           <span asp-validation-for="AccountId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            Account Name
+                                            <input asp-for="AccountName" id="ddlAcctName" class="form-control" required />
+                                            <span asp-validation-for="AccountName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            Account Type
+                                            <input asp-for="DfDescription" id="ddlAccountType" class="form-control" required />
+                                            <span asp-validation-for="DfDescription" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Account Category
+                                            <input  id="ddlAccountCate" class="form-control" required />
+                                         
+                                        </div>
+                                    </div>
+                                    <div class="row">                                        
+                                        <div class="form-group col-md-6">
+                                            Accounts/Finance:
+                                            @Html.DropDownListFor(model=>model.FinancePnc,new SelectList(ViewBag.finance),
+                                           "Select post to finance", new {id="ddlFinance",@class="form-control" })
+           
+                                        </div>                                        
+                                        <div class="form-group col-md-6">
+                                            Teller:
+                                            @Html.DropDownListFor(model=>model.TellerPnc,new SelectList(ViewBag.teller),
+                                               "Select post to teller", new {id="ddlTeller",@class="form-control" })
+   
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-info" id="btnDefaultUpdate" type="submit" value="Update Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Update Record
+                                        </button>
+                                        <button class="btn btn-info" id="btnDefault" type="submit" value="Save Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Save Record
+                                        </button>
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="fa fa-recycle"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+
+    </div>
+</div>
+

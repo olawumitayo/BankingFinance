@@ -1,0 +1,31 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": true,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/TheCorebanking.Finance",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:22203/",
+      "sslPort": 44326
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "TheCorebanking.Finance": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:22204/"
+    }
+  }
+}

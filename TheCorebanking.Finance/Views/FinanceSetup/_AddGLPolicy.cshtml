@@ -1,0 +1,182 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblGlpolicy
+
+
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">GL Policy</small></h4>
+    </div>
+    <div class="card-body">
+        <div id="Policy-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnAddGLPolicy" data-toggle="modal" data-target="#AddNewGLPolicy" type="button" value="Add GL Policy">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add GL Policy
+                </button>
+            </div>
+       
+        </div>
+        <table id="GLPolicyTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listPolicy", "financesetup")"
+               data-search="true"
+               data-toolbar="#Policy-toolbar"
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-show-export="true"
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"            
+               data-check-on-init="true"               
+               data-detail-formatter="detailFormatter"
+               data-pagination="true"
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    <th data-field="glLength" data-sortable="true"><b>GL Lenght</b></th>
+                    <th data-field="companyCode" data-sortable="true"><b>Company Code</b></th>
+                    <th data-field="branchCode" data-sortable="true"><b>Branch Code</b></th>
+                    <th data-field="pfoductGroupId" data-sortable="true"><b>Product GroupId</b></th>
+                    <th data-field="accountType" data-sortable="true"><b>Account Type</b></th>
+                    <th data-field="currencyId" data-sortable="true"><b>CurrencyID</b></th>
+                    @*<th data-field="" data-align="right" data-events="glPolicyEvents" data-formatter="glPolicyFormatter">  </th>*@
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div id="AddNewGLPolicy" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">ADD NEW GL Policy</h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddGLPolicy" id="frmGLPolicy">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#cost" aria-expanded="true" aria-controls="cost">
+                                    GL Policy
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="company" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="Id" class="form-control" type="hidden" />
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            GL Length
+                                            <input asp-for="GlLength" required class="form-control" placeholder="Minimum number:6 and Maximum number is 9"/>
+                                            <span asp-validation-for="GlLength" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10 mb-3">
+                                                <div class="form-check pl-0">
+                                                    <label class="form-check-label">
+                                                        <input name="isGL" id="isCompany"
+                                                               class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>Company Code
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10 mb-3">
+                                                <div class="form-check pl-0">
+                                                    <label class="form-check-label">
+                                                        <input name="isGL" id="isBranch"
+                                                               class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>Branch Code
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10 mb-3">
+                                                <div class="form-check pl-0">
+                                                    <label class="form-check-label">
+                                                        <input name="isGL" id="isProduct"
+                                                               class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>Product Group Code
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10 mb-3">
+                                                <div class="form-check pl-0">
+                                                    <label class="form-check-label">
+                                                        <input name="isGL" id="isAccount"
+                                                               class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>Account Type Code
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10 mb-3">
+                                                <div class="form-check pl-0">
+                                                    <label class="form-check-label">
+                                                        <input name="isGL" id="isCurrency"
+                                                               class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>Currency Code
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                    <hr />
+                    <div class="form-group text-right">
+                        <button class="btn btn-info" id="btnGLPolicyUpdate" type="submit" value="Update Record">
+                            <i class="now-ui-icons ui-1_check"></i>
+                            Update Record
+                        </button>
+
+                        <button class="btn btn-info" id="btnGLPolicy" type="submit" value="Save Record">
+                            <i class="now-ui-icons ui-1_check"></i>
+                            Save Record
+                        </button>
+                        <button class="btn btn-danger" type="reset">
+                            <i class="fa fa-recycle"></i>
+                            Clear
+                        </button>
+                    </div>
+
+
+                </form>
+
+            </div>
+          
+        </div>
+
+    </div>
+</div>

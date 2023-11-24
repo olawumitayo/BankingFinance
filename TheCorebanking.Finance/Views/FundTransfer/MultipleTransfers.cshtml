@@ -1,0 +1,406 @@
+﻿
+@section pagedescription{ 
+    <span class="title f24px">MULTIPLE TRANSFERS </span>
+}
+
+    <div class="card" >
+      
+        <div class="card-body">
+            <div class="row">
+                <div class="card card-plain">
+                    <div class="card-body">
+                        <div id="custom-toolbar">
+                            <div class="dropdown" id="accountTypes">
+                                <button class="btn btn-danger" id="btnAddCustomer" data-toggle="dropdown"
+                                        type="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons ui-1_simple-add"></i>
+                                    Add New Beneficiary
+                                </button>
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header">Add Multiple Transfers</h6>
+                                    <a class="dropdown-item" id="1" onclick="openModal(this);">Multiple Transfers</a>
+
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <table id="multipleTable" data-toggle="table"
+                               data-url="listmultiple"
+                               data-search="true"
+                               
+                               data-show-export="true"
+                               data-minimum-count-columns="2"
+                               data-pagination="true"
+                             
+                               data-toolbar="#custom-toolbar"
+                               data-mobile-responsive="true"
+                               data-show-refresh="true"
+                              
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-checkbox-header="true"
+                               data-click-to-select="true"
+                               data-multiple-select="true"
+                               data-detail-formatter="detailFormatter"
+                               data-buttons-class="danger">
+                            <thead>
+                                <tr>                      
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="reference" data-sortable="true"><b>Reference</b></th>
+                                    <th data-field="accountNo"><b>Account</b></th>
+                                    <th data-field="amount"><b>Amount</b></th>
+                                    <th data-field="dateCreated" data-formatter="dateFormatter" data-sortable="true"><b>Date</b></th>
+                                    <th data-field="remark"><b>Status</b></th>
+                                    <th data-field="narration"><b>Narrations</b></th>
+                                   
+                                        
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-backdrop="static" data-keyboard="false"
+         id="wizardModal" tabindex="-1" role="dialog"
+         aria-labelledby="wizardModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="wizard-container">
+                        <div class="card card-wizard mb-0" id="wizardComponent" data-color="red">
+                            <div class="card-header text-center" data-background-color="red">
+                                <h3 class="card-title">
+                                    <span>Create <span id="createCustType"></span> </span>
+                                    <span>
+                                        <button type="button" class="close opaque" data-dismiss="modal">
+                                            <i class="now-ui-icons ui-1_simple-remove light-icon"></i>
+                                        </button>
+                                    </span>
+                                </h3>
+                                <div class="wizard-navigation">
+                                    <ul class="row justify-content-around">
+                                        <li class="nav-item personalPrimary">
+                                            <a class="nav-link" href="#personalPrimary" data-toggle="tab">
+                                                <i class="now-ui-icons users_circle-08"></i>
+                                                Debit Account
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item bank">
+                                            <a class="nav-link" href="#bank" data-toggle="tab">
+                                                <i class="now-ui-icons business_bank"></i>
+                                                Credit Account
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div id="personalPrimary" class="tab-pane fade">
+                                        <form id="multipleTransferDebit">
+                                            <strong>DEBIT ACCOUNT DETAILS</strong>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Account No/Name:</label>
+                                                        <br />
+                                                        <select id="ddlCustAccount" name="ddlCustAccount" class="form-control" required>
+                                                            <option value="" selected hidden>Enter Account No/Name ...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Transaction Charge Type:</label>
+                                                        <br />
+                                                        <select id="ddlChargeType" name="ddlChargeType" class="form-control" required>
+                                                            <option value="" selected hidden>Select Transaction Charge ...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Account Name:</label>
+                                                        <input type="text" class="form-control" required id="Accountname" placeholder="Account Name" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Account No.:</label>
+                                                        <input type="text" class="form-control" required id="Accountnumber" placeholder="Account No" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group">
+                                                        <label>Current Balance:</label>
+                                                        <input type="text" class="form-control style="color:green;font-weight:bold"  text-right" required id="availablebalance" placeholder="0.00" disabled>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Amount </label>
+                                                        <input type="text" id="Amounts" style="color:green;font-weight:bold" required class="form-control text-right" placeholder="0.00" autofocus>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Posting Date:</label>
+                                                        <div class='input-group date'>
+                                                            <input type="text" id="Postingdate" class="form-control" required placeholder="Posting Date">
+                                                            <span class="input-group-addon">
+                                                                @*<span class="fa fa-calendar"></span>*@
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Value Date:</label>
+                                                        <div class='input-group date'>
+                                                            <input type="text" id="Valuedate" class="form-control" required placeholder="Val.Date">
+                                                            <span class="input-group-addon">
+                                                                @*<span class="fa fa-calendar"></span>*@
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Batch Name:</label>
+                                                        <input type="text" id="BatchName" class="form-control" placeholder="Batch Name">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Narration</label>
+                                                        <textarea rows="4" cols="80" id="NarrationDr" required class="form-control" placeholder="Here can be your description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+
+                                    <div id="bank" class="tab-pane fade">
+                                        <form id="multipleTransferCredit">
+                                            <strong>CREDIT ACCOUNT DETAILS</strong>
+                                            <hr />
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label> Account No/Name:</label>
+                                                        <br />
+                                                        <select id="ddlAccts" name="ddlAccts" class="form-control" required>
+                                                            <option value="" selected hidden>Enter Account No/Name ...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Account Name:</label>
+                                                        <input type="text" id="BeneficiaryName" required class="form-control" placeholder="Account Name" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Account No.:</label>
+                                                        <input type="text" id="BeneficiaryNo" required class="form-control" placeholder="Account No" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <div class="form-group">
+                                                        <label>Current Balance:</label>
+                                                        <input type="text" id="BalancesCr" style="color:green;font-weight:bold" required class="form-control text-right" placeholder="0.00" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <div class="form-group">
+                                                        <label>Product:</label>
+                                                        <input type="text" id="ProductsCr" required class="form-control text-right" placeholder="Product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <div class="form-group">
+                                                        <label>Credit Amount </label>
+                                                        <b><input type="number" id="AmountsCr" style="color:green;font-weight:bold" required class="form-control text-right text-success" placeholder="0.00"></b>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Transaction Type:</label>
+                                                        <input type="text" id="transTypeCr" class="form-control" placeholder="Trans Type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Narration</label>
+                                                        <textarea rows="4" required id="NarrationsCr" cols="80" class="form-control" placeholder="Here can be your description"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                               </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+
+                                <div class="pull-right">
+                                    <input type='button' class='btn btn-danger btn-next btn-wd' value='Next' />
+                                    @*<input type='button'  class='btn btn-danger btn-add btn-wd' value='Add'  />*@
+                                    <input type='button' class='btn btn-danger btn-finish btn-wd' value='Add New' />
+                                </div>
+
+                                <div class="pull-left">
+                                    <input type='button' class='btn btn-danger btn-previous btn-wd' value='Previous' />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div id="temp-toolbar" class="col-md-2">
+                        <button class="btn btn-danger" id="btnAddFinish"
+                                type="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="now-ui-icons ui-1_send"></i>
+                            Send
+                        </button>
+                    </div>
+                    <div class="row col-md-offset-10">
+                        <div class="col-md-3 ">
+                              <input type="text" class="form-control  text-right"  id="TotalDebit" placeholder="Debit Amount" >
+                        </div>
+                        <div class="col-md-3">                
+                                <input type="text" id="TotalCredit"  class="form-control text-right" placeholder="Credit Amount" >
+                        </div>
+                    </div>
+                    <table id="tempTable" data-toggle="table"
+                           data-url="listmultipleTemp"
+                           data-search="true"
+                           data-show-export="true"
+                           data-minimum-count-columns="2"
+                           data-pagination="true"
+                           data-toolbar="#temp-toolbar"
+                           data-mobile-responsive="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-checkbox-header="true"
+                           data-click-to-select="true"
+                           data-multiple-select="true"
+                           data-detail-formatter="detailFormatter"
+                           data-buttons-class="danger">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="reference" data-sortable="true"><b>Reference</b></th>
+                                <th data-field="accountNo"><b>Account</b></th>
+                                <th data-field="amount"><b>Amount</b></th>
+                                <th data-field="dateCreated" data-formatter="dateFormatter" data-sortable="true"><b>Date</b></th>
+                                <th data-field="remark"><b>Status</b></th>
+                                <th data-field="" data-events="multipleEvents" data-formatter="multipleFormatter">  </th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-backdrop="static" data-keyboard="false"
+         id="amountUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="">
+                        <h4 class="text-primary font-weight-bold mb-2 col-md-offset-3">
+                            Beneficiary Account <input type="text" class="text-primary" id="sessionId" disabled />
+                        </h4>
+                        
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">                    
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="card shadow-none">
+                                    <form id="frmAmountUpdate">
+                                        <input type="text" id="id" hidden />
+                                        <input type="hidden" name="customerid" />
+                                        <div class="row mb-2 required">
+                                            <label class="col-md-4 col-form-label">Amount Cr.</label>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input name="amount" id="AmountsUpCr" required class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2 justify-content-between">
+                                            <div class="col">
+                                                <button type="button" class="btn btn-danger btn-wd pull-left"
+                                                       >
+                                                    CANCEL
+                                                </button>
+                                            </div>
+                                            <div class="col">
+                                                <button type="button" id="updateBtn"
+                                                        class="btn btn-danger btn-wd pull-right">
+                                                    UPDATE
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts{ 
+    <script src="~/js/MultipleTransfer.js"></script>
+ 
+}

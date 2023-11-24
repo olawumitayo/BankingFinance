@@ -1,0 +1,92 @@
+﻿
+
+@{
+    ViewData["Title"] = "Chart of Account Setup";
+}
+@section title{
+    @ViewData["Title"]
+}
+
+@section pagedescription{
+    <h5> The chart of account setup is happening here. </h5>
+
+}
+
+<div class="card ">
+
+    <div class="card-header text-center">
+        <h4 class="card-title">CHART OF ACCOUNT SETUP </h4>
+    </div>
+
+    <div class="card-body ">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <!--
+            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+        -->
+                <ul class="nav nav-pills nav-pills-danger nav-pills-icons flex-column" role="tablist">
+
+
+            
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Newchart" role="tablist">
+                            <i class="now-ui-icons business_chart-bar-32"></i>
+                           Chart Of Account
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#posting" role="tablist">
+                            <i class="now-ui-icons business_bank"></i>
+                            Default Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#glbank" role="tablist">
+                            <i class="now-ui-icons business_briefcase-24"></i>
+                            Map Ledger
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+
+
+                 
+                    <div class="tab-pane active" id="Newchart">
+                        @Html.Partial("_AddNewChart")
+                    </div>
+                    <div class="tab-pane" id="posting">
+                        @Html.Partial("_AddPosting")
+                    </div>
+                    <div class="tab-pane" id="glbank">
+                        @Html.Partial("_AddGL")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+@section Scripts {
+
+    <script src="~/js/chart.js"></script>
+    <script src="~/js/posting.js"></script>
+    <script src="~/js/GL.js"></script>
+ 
+}
+
+
+
+

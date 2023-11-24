@@ -1,0 +1,224 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblFinanceAccountType
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">Main Caption</small></h4>
+    </div>
+
+    <div class="card-body">
+        <div id="main-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnMains" data-toggle="modal" data-target="#AddNewMain" type="button" value="Add Main">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add Main Caption
+                </button>
+            </div>
+            <div class="form-group text-right">
+                <input type="file" class="file btn btn-danger" id="btnUploadMain" />
+                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                Upload Main
+            </div>
+        </div>
+        <table id="mainTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listmain", "caption")"
+               data-search="true"
+               data-search-align="right"
+               data-toolbar="#main-toolbar"              
+               data-show-export="true"
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"              
+               data-mobile-responsive="true"
+               data-check-on-init="true" 
+               data-pagination="true"
+               ata-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-pagination="true"
+               data-show-columns="true"
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    <th data-field="id" data-visible="false"></th>
+                    <th data-field="description" data-sortable="true"><b>Description</b></th>
+                   
+                    <th data-field="active" data-sortable="true"><b>Active</b>
+                    <th data-field=""  data-events="mainEvents" data-formatter="mainFormatter">  </th>
+                </tr>
+            </thead>
+        </table>
+
+
+
+    </div>
+
+</div>
+<div id="AddNewMain" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">ADD NEW MAIN CAPTION </h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddMain" id="frmMain">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#mains" aria-expanded="true" aria-controls="main">
+                                    Main Caption
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="mains" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="Id" class="form-control" type="hidden" />
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Main Caption
+                                            <input asp-for="Description" class="form-control" required />
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>                                      
+                                            <div class="form-group col-md-6">
+                                                Sub Caption
+                                                <select id="ddlSub" name="ddlSub" class="form-control" required>
+                                                    <option disabled value="" selected hidden>Select sub caption...</option>
+                                                </select>
+                                                <span asp-validation-for="SubCaptionId" class="text-danger"></span>
+                                            </div>                                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Account Category
+                                            <select id="ddlAccountCategory" name="ddlAccountCategory" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Category...</option>
+                                            </select>
+                                            <span asp-validation-for="AccountCategoryId" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Active
+                                            @Html.DropDownListFor(model => model.AccountCategoryId, new SelectList(ViewBag.status), 
+                                           "Select status ", new { id = "ddlActive", @class = "form-control",required="Account category is required" })                                          
+                                            <span asp-validation-for="Active" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                  
+                                    <hr />
+
+                                    <div class="form-group text-right">
+                                  
+
+                                        <button class="btn btn-info" id="btnMain" type="submit" value="Save Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Save Record
+                                        </button>
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="fa fa-recycle"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="UpdateMain" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">UPDATE MAIN CAPTION </h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="UpdateMain" id="frmUpdateMain">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#mains" aria-expanded="true" aria-controls="main">
+                                    Main Caption
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="mains" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input id="IdUpdate" class="form-control" type="hidden" />
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Main Caption
+                                            <input id="DescriptionUpdate" class="form-control" required />
+                                         
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Sub Caption
+                                            <select id="ddlSubUpdate" name="ddlSubUpdate" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select sub caption...</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Account Category
+                                            <select id="ddlAccountCategoryUpdate" name="ddlAccountCategoryUpdate" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Category...</option>
+                                            </select>
+                                          
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Active
+                                            @Html.DropDownListFor(model => model.AccountCategoryId, new SelectList(ViewBag.status),
+                                           "Select status ", new { id = "ddlActiveUpdate", @class = "form-control", required = "Account category is required" })
+                                          
+                                        </div>
+                                    </div>
+
+                                    <hr />
+
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-info" id="btnMainUpdate" type="submit" value="Update Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Update Record
+                                        </button>
+
+                                       
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+

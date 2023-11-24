@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "AccessDenied";
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+}
+
+
+<div class="col-md-6 ml-auto mr-auto">
+    @Html.PartialAsync("_ValidationSummary")   
+    <form asp-action="Index" class="consent-form">
+        <div class="card card-lock text-center">
+            <div class="card-header ">
+                @if (Model.ClientLogoUrl != null)
+                {
+                    <div class="client-logo"><img src="@Model.ClientLogoUrl"></div>
+                }
+                else
+                {
+                    <img src="~/img/fintraklogo.png" alt="...">
+                }
+
+            </div>
+            
+            <div class="card-body ">
+
+                <h4 class="card-title">@Model.ClientName <br /></h4>
+
+                <div class="form-group">
+
+                  
+                    <div>You don't have the required permission to the requested page.</div>
+                </div>
+
+
+            </div>
+
+            <div class="card-footer ">
+                <div class="consent-buttons">
+                    <button name="button" value="yes" class="btn btn-primary" autofocus>Yes, Allow</button>
+                    <button name="button" value="no" class="btn">No, Do Not Allow</button>
+                    @if (Model.ClientUrl != null)
+                    {
+                        <a class="pull-right btn btn-default" target="_blank" href="@Model.ClientUrl">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            <strong>@Model.ClientName</strong>
+                        </a>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+</div>
+@*<div class="text-center">
+    <h1 class="text-danger">Access Denied</h1>
+    <h6 class="text-danger">You do not have permission to view this resource</h6>
+
+    <img src="~/img/noaccess.png" style="height:300px;width:300px;"/>
+    
+</div>*@

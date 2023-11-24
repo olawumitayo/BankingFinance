@@ -1,0 +1,180 @@
+﻿@model TheCoreBanking.Finance.Data.Models.TblFinanceBank
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">Map Ledger to Bank Account</small></h4>
+    </div>
+
+    <div class="card-body">
+
+
+        <div id="gl-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnGLs" data-toggle="modal" data-target="#AddNewGL" type="button" value="Add GL">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add Map Ledger
+                </button>
+            </div>
+            <div class="form-group text-right">
+                <input type="file" class="file btn btn-danger" id="btnUploadGL" />
+                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                Upload GL
+            </div>
+        </div>
+        <table id="glTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listGL", "chart")"
+               data-search="true"
+               data-show-export="true"
+               data-search-align="right"
+               data-toolbar="#gl-toolbar"
+               
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+                   data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"            
+               data-check-on-init="true" 
+               data-pagination="true"
+               data-detail-formatter="detailFormatter"
+               data-buttons-class="danger">
+            <thead>
+                <tr>                   
+                    <th data-field="bankId" data-visible="false"><b>Bank Id</b></th>
+                    <th data-field="bankName"><b>Bank</b></th>
+                    <th data-field="accountId"><b>Acc No</b></th>
+                    <th data-field="contactName"><b> Name</b></th>
+                    <th data-field="" data-align="right" data-events="glEvents" data-formatter="glFormatter">  </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+<div id="AddNewGL" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                @*<h7 class="modal-title">ADD NEW GL </h7>*@
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddGL" id="frmgl">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#gl" aria-expanded="true" aria-controls="gl">
+                                    LEDGER MAPPING TO BANK ACCOUNT
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="gl" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="Id" class="form-control" type="hidden" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Company
+                                            <select id="ddlCompanys" name="ddlCompanys" class="form-control" required>
+                                                <option disabled value="" selected hidden>Select Company ...</option>
+                                            </select>                                            
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Branch
+                                            <select id="ddlBranchs" name="ddlBranchs" class="form-control" required>
+                                                <option disabled value="" selected hideen>Select GL Branch...</option>
+                                            </select>
+                                            <span asp-validation-for="BranchName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            GL Bank
+                                            <select id="ddlGL" name="ddlGL" class="form-control" required0[u>
+                                                <option disabled value="" selected hideen>Select GL Bank...</option>
+                                            </select>
+                                            <span asp-validation-for="BankId" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            GL Account No
+                                            <input asp-for="AccountId" id="ddlBank" class="form-control" required disabled />
+                                            <span asp-validation-for="AccountId" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group  col-md-6">
+                                            Account No.
+                                            <input asp-for="AccNo"  class="form-control" required />
+                                            <span asp-validation-for="AccNo" class="text-danger"></span>
+
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Bank Name
+                                            <input asp-for="BankName" id="ddlName" class="form-control" required  />
+                                            <span asp-validation-for="BankName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Contact Name
+                                            <input asp-for="ContactName" class="form-control" required />
+                                            <span asp-validation-for="ContactName" class="text-danger"></span>
+
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            Email
+                                            <input asp-for="ContactEmail"  class="email form-control" required />
+                                            <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            Address
+                                            <input asp-for="ContactAddress" class="form-control" required />
+                                            <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            Phone No
+                                            <input asp-for="ContactPhoneNo" class="form-control" required />
+                                            <span asp-validation-for="ContactPhoneNo" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <hr />
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-info" id="btnGLUpdate" type="submit" value="Update Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Update Record
+                                        </button>
+                                        <button class="btn btn-info" id="btnGL" type="submit" value="Save Record">
+                                            <i class="now-ui-icons ui-1_check"></i>
+                                            Save Record
+                                        </button>
+
+                                        <button class="btn btn-danger" type="reset">
+                                            <i class="fa fa-recycle"></i>
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                                    </div>
+                                </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

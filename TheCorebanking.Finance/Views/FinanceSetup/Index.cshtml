@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "General Setup";
+}
+@section title{
+    @ViewData["Title"]
+}
+
+@section pagedescription{
+    <h5> The ledger setup is happening here. </h5>
+
+}
+
+<div class="card ">
+
+    <div class="card-header text-center">
+        <h4 class="card-title">LEDGER SETUP </h4>
+    </div>
+
+    <div class="card-body ">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <!--
+                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                -->
+                <ul class="nav nav-pills nav-pills-danger nav-pills-icons flex-column" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#group" role="tablist">
+                            <i class="now-ui-icons business_bank"></i>
+                            Group
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#category" role="tablist">
+                            <i class="now-ui-icons business_briefcase-24"></i>
+                            Category
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#cost" role="tablist">
+                            <i class="now-ui-icons business_chart-bar-32"></i>
+                            Cost Center
+                        </a>
+                    </li>
+
+                    @*<li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#currency" role="tablist">
+                            <i class="now-ui-icons business_money-coins"></i>
+                            Currency
+                        </a>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#level" role="tablist">
+                            <i class="now-ui-icons business_badge"></i>
+                            GL Level
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Policy" role="tablist">
+                            <i class="now-ui-icons business_bank"></i>
+                            GL Policy Definition
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="group">
+                        @Html.Partial("_AddGroup")
+                    </div>
+                    <div class="tab-pane" id="category">
+                        @Html.Partial("_AddCategory")
+                    </div>
+                    @*<div class="tab-pane" id="currency">
+                        @Html.Partial("_AddCurrency")
+                    </div>*@
+                    <div class="tab-pane" id="cost">
+                        @Html.Partial("_AddCost")
+                    </div>
+                    <div class="tab-pane" id="level">
+                        @Html.Partial("_AddGLLevel")
+                    </div>
+                    <div class="tab-pane" id="Policy">
+                        @Html.Partial("_AddGLPolicy")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+@section Scripts {
+
+    <script src="~/js/group.js"></script>
+    <script src="~/js/category.js"></script>
+    <script src="~/js/cost.js"></script>
+    <script src="~/js/currency.js"></script>
+    <script src="~/js/GLLevel.js"></script>
+    <script src="~/js/GLPolicy.js"></script>
+}
+
+
+
+

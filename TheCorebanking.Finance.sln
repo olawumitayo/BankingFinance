@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheCorebanking.Finance.Data", "TheCorebanking.Finance.Data\TheCorebanking.Finance.Data.csproj", "{29DE98FB-F1C2-42A3-A552-840EC1845DA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheCorebanking.Finance", "TheCorebanking.Finance\TheCorebanking.Finance.csproj", "{F9EA0D25-DE5E-4D38-BF0A-6B34E976E7D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29DE98FB-F1C2-42A3-A552-840EC1845DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DE98FB-F1C2-42A3-A552-840EC1845DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DE98FB-F1C2-42A3-A552-840EC1845DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DE98FB-F1C2-42A3-A552-840EC1845DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9EA0D25-DE5E-4D38-BF0A-6B34E976E7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9EA0D25-DE5E-4D38-BF0A-6B34E976E7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9EA0D25-DE5E-4D38-BF0A-6B34E976E7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9EA0D25-DE5E-4D38-BF0A-6B34E976E7D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9E1688D-1D03-4603-8F74-425154136EBD}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://bankingplatform:2805/teamwork/thecorebankingcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TheCorebanking.Finance.Data\\TheCorebanking.Finance.Data.csproj
+		SccProjectName1 = TheCorebanking.Finance.Data
+		SccLocalPath1 = TheCorebanking.Finance.Data
+		SccProjectUniqueName2 = TheCorebanking.Finance\\TheCorebanking.Finance.csproj
+		SccProjectName2 = TheCorebanking.Finance
+		SccLocalPath2 = TheCorebanking.Finance
+	EndGlobalSection
+EndGlobal

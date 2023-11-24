@@ -1,0 +1,356 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+<UserSecretsId>8b252b01-1a79-4a35-963d-3371ca29e8ab</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ActivityLog.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="3.7.1" />
+    <PackageReference Include="IdentityServer4" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
+    <PackageReference Include="jquery.TypeScript.DefinitelyTyped" Version="3.1.2" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.7.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.7.1" />
+    <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" PrivateAssets="All" />
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.15" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.1.2" />
+    <PackageReference Include="Stimulsoft.Reports.Web.NetCore" Version="2018.2.3" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TheCorebanking.Finance.Data\TheCorebanking.Finance.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TheCoreBanking.Finance.csproj" />
+    <None Include="TheCoreBanking.Finance.csproj.user" />
+    <None Include="Views\Caption\Index.cshtml" />
+    <None Include="Views\Caption\_AddMain.cshtml" />
+    <None Include="Views\Caption\_AddSub.cshtml" />
+    <None Include="Views\Caption\_ViewImports.cshtml" />
+    <None Include="Views\Caption\_ViewStart.cshtml" />
+    <None Include="Views\Chart\Index.cshtml" />
+    <None Include="Views\Chart\_AddChart.cshtml" />
+    <None Include="Views\Chart\_AddGL.cshtml" />
+    <None Include="Views\Chart\_AddPosting.cshtml" />
+    <None Include="Views\Chart\_ViewImports.cshtml" />
+    <None Include="Views\Chart\_ViewStart.cshtml" />
+    <None Include="Views\FinanceSetup\Index.cshtml" />
+    <None Include="Views\FinanceSetup\_AddCategory.cshtml" />
+    <None Include="Views\FinanceSetup\_AddCost.cshtml" />
+    <None Include="Views\FinanceSetup\_AddCurrency.cshtml" />
+    <None Include="Views\FinanceSetup\_AddGroup.cshtml" />
+    <None Include="Views\FinanceSetup\_ViewImports.cshtml" />
+    <None Include="Views\FinanceSetup\_ViewStart.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_GeneralLayout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\core\bootstrap.min.js" />
+    <None Include="wwwroot\core\jquery.js" />
+    <None Include="wwwroot\core\jquery.min.js" />
+    <None Include="wwwroot\core\jquery.slim.min.js" />
+    <None Include="wwwroot\core\popper.min.js" />
+    <None Include="wwwroot\core\select2.full.js" />
+    <None Include="wwwroot\core\select2.full.min.js" />
+    <None Include="wwwroot\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\css\select2\select2-bootstrap.zip" />
+    <None Include="wwwroot\css\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\css\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\css\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\css\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\css\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\css\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\demo\demo.js" />
+    <None Include="wwwroot\demo\jquery.sharrre.js" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_aZA3g3D_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_aZA3gbD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_aZA3gfD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_aZA3gnD_g.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_aZA3gTD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_dJE3g3D_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_dJE3gbD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_dJE3gfD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2" />
+    <None Include="wwwroot\fonts\JTURjIg1_i6t8kCHKm45_dJE3gTD_u50.woff2" />
+    <None Include="wwwroot\fonts\JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2" />
+    <None Include="wwwroot\fonts\JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2" />
+    <None Include="wwwroot\fonts\JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" />
+    <None Include="wwwroot\fonts\JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2" />
+    <None Include="wwwroot\fonts\JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2" />
+    <None Include="wwwroot\fonts\nucleo-outline.woff2" />
+    <None Include="wwwroot\images\banner1.svg" />
+    <None Include="wwwroot\images\banner2.svg" />
+    <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\images\banner4.svg" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\bootstraptable\bootstrap-table-locale-all.js" />
+    <None Include="wwwroot\js\bootstraptable\bootstrap-table-locale-all.min.js" />
+    <None Include="wwwroot\js\bootstraptable\bootstrap-table.js" />
+    <None Include="wwwroot\js\bootstraptable\bootstrap-table.min.js" />
+    <None Include="wwwroot\js\bootstraptable\export\bootstrap-table-export.js" />
+    <None Include="wwwroot\js\bootstraptable\export\bootstrap-table-export.min.js" />
+    <None Include="wwwroot\js\bootstraptable\group-by-v2\bootstrap-table-group-by.js" />
+    <None Include="wwwroot\js\bootstraptable\group-by-v2\bootstrap-table-group-by.min.js" />
+    <None Include="wwwroot\js\bootstraptable\group-by\bootstrap-table-group-by.js" />
+    <None Include="wwwroot\js\bootstraptable\group-by\bootstrap-table-group-by.min.js" />
+    <None Include="wwwroot\js\bootstraptable\mobile\bootstrap-table-mobile.js" />
+    <None Include="wwwroot\js\bootstraptable\mobile\bootstrap-table-mobile.min.js" />
+    <None Include="wwwroot\js\bootstraptable\print\bootstrap-table-print.js" />
+    <None Include="wwwroot\js\bootstraptable\print\bootstrap-table-print.min.js" />
+    <None Include="wwwroot\js\bootstraptable\select2-filter\bootstrap-table-select2-filter.js" />
+    <None Include="wwwroot\js\bootstraptable\select2-filter\bootstrap-table-select2-filter.min.js" />
+    <None Include="wwwroot\js\category.js" />
+    <None Include="wwwroot\js\chart.js" />
+    <None Include="wwwroot\js\core\bootstrap.min.js" />
+    <None Include="wwwroot\js\core\jquery.js" />
+    <None Include="wwwroot\js\core\jquery.min.js" />
+    <None Include="wwwroot\js\core\popper.min.js" />
+    <None Include="wwwroot\js\core\select2.full.js" />
+    <None Include="wwwroot\js\core\select2.full.min.js" />
+    <None Include="wwwroot\js\cost.js" />
+    <None Include="wwwroot\js\currency.js" />
+    <None Include="wwwroot\js\GL.js" />
+    <None Include="wwwroot\js\group.js" />
+    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\maincaption.js" />
+    <None Include="wwwroot\js\MIS.js" />
+    <None Include="wwwroot\js\now-ui-dashboard.minf700.js" />
+    <None Include="wwwroot\js\pace.js" />
+    <None Include="wwwroot\js\pace.min.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-datetimepicker.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-notify.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-selectpicker.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-switch.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-tagsinput.js" />
+    <None Include="wwwroot\js\plugins\buttons.js" />
+    <None Include="wwwroot\js\plugins\chartjs.min.js" />
+    <None Include="wwwroot\js\plugins\fullcalendar.min.js" />
+    <None Include="wwwroot\js\plugins\jasny-bootstrap.min.js" />
+    <None Include="wwwroot\js\plugins\jquery-jvectormap.js" />
+    <None Include="wwwroot\js\plugins\jquery.bootstrap-wizard.js" />
+    <None Include="wwwroot\js\plugins\jquery.dataTables.min.js" />
+    <None Include="wwwroot\js\plugins\jquery.validate.min.js" />
+    <None Include="wwwroot\js\plugins\moment.min.js" />
+    <None Include="wwwroot\js\plugins\nouislider.min.js" />
+    <None Include="wwwroot\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\js\plugins\sweetalert2.min.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\js\posting.js" />
+    <None Include="wwwroot\js\select2.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\js\subcaption.js" />
+    <None Include="wwwroot\js\unit.js" />
+    <None Include="wwwroot\lib\bootstrap\CHANGELOG.md" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\Gemfile" />
+    <None Include="wwwroot\lib\bootstrap\Gemfile.lock" />
+    <None Include="wwwroot\lib\bootstrap\Gruntfile.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\.jshintrc" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\change-version.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\lib\bootstrap\js\.jscsrc" />
+    <None Include="wwwroot\lib\bootstrap\js\.jshintrc" />
+    <None Include="wwwroot\lib\bootstrap\js\affix.js" />
+    <None Include="wwwroot\lib\bootstrap\js\alert.js" />
+    <None Include="wwwroot\lib\bootstrap\js\button.js" />
+    <None Include="wwwroot\lib\bootstrap\js\carousel.js" />
+    <None Include="wwwroot\lib\bootstrap\js\collapse.js" />
+    <None Include="wwwroot\lib\bootstrap\js\dropdown.js" />
+    <None Include="wwwroot\lib\bootstrap\js\modal.js" />
+    <None Include="wwwroot\lib\bootstrap\js\popover.js" />
+    <None Include="wwwroot\lib\bootstrap\js\scrollspy.js" />
+    <None Include="wwwroot\lib\bootstrap\js\tab.js" />
+    <None Include="wwwroot\lib\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\lib\bootstrap\js\transition.js" />
+    <None Include="wwwroot\lib\bootstrap\less\.csslintrc" />
+    <None Include="wwwroot\lib\bootstrap\less\alerts.less" />
+    <None Include="wwwroot\lib\bootstrap\less\badges.less" />
+    <None Include="wwwroot\lib\bootstrap\less\bootstrap.less" />
+    <None Include="wwwroot\lib\bootstrap\less\breadcrumbs.less" />
+    <None Include="wwwroot\lib\bootstrap\less\button-groups.less" />
+    <None Include="wwwroot\lib\bootstrap\less\buttons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\carousel.less" />
+    <None Include="wwwroot\lib\bootstrap\less\close.less" />
+    <None Include="wwwroot\lib\bootstrap\less\code.less" />
+    <None Include="wwwroot\lib\bootstrap\less\component-animations.less" />
+    <None Include="wwwroot\lib\bootstrap\less\dropdowns.less" />
+    <None Include="wwwroot\lib\bootstrap\less\forms.less" />
+    <None Include="wwwroot\lib\bootstrap\less\glyphicons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\grid.less" />
+    <None Include="wwwroot\lib\bootstrap\less\input-groups.less" />
+    <None Include="wwwroot\lib\bootstrap\less\jumbotron.less" />
+    <None Include="wwwroot\lib\bootstrap\less\labels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\list-group.less" />
+    <None Include="wwwroot\lib\bootstrap\less\media.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\alerts.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\background-variant.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\border-radius.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\buttons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\center-block.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\clearfix.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\forms.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\gradients.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\grid-framework.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\grid.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\hide-text.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\image.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\labels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\list-group.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\nav-divider.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\opacity.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\pagination.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\panels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\progress-bar.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\reset-filter.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\reset-text.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\resize.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\size.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\tab-focus.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\table-row.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\text-overflow.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" />
+    <None Include="wwwroot\lib\bootstrap\less\modals.less" />
+    <None Include="wwwroot\lib\bootstrap\less\navbar.less" />
+    <None Include="wwwroot\lib\bootstrap\less\navs.less" />
+    <None Include="wwwroot\lib\bootstrap\less\normalize.less" />
+    <None Include="wwwroot\lib\bootstrap\less\pager.less" />
+    <None Include="wwwroot\lib\bootstrap\less\pagination.less" />
+    <None Include="wwwroot\lib\bootstrap\less\panels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\popovers.less" />
+    <None Include="wwwroot\lib\bootstrap\less\print.less" />
+    <None Include="wwwroot\lib\bootstrap\less\progress-bars.less" />
+    <None Include="wwwroot\lib\bootstrap\less\responsive-embed.less" />
+    <None Include="wwwroot\lib\bootstrap\less\responsive-utilities.less" />
+    <None Include="wwwroot\lib\bootstrap\less\scaffolding.less" />
+    <None Include="wwwroot\lib\bootstrap\less\tables.less" />
+    <None Include="wwwroot\lib\bootstrap\less\theme.less" />
+    <None Include="wwwroot\lib\bootstrap\less\thumbnails.less" />
+    <None Include="wwwroot\lib\bootstrap\less\tooltip.less" />
+    <None Include="wwwroot\lib\bootstrap\less\type.less" />
+    <None Include="wwwroot\lib\bootstrap\less\utilities.less" />
+    <None Include="wwwroot\lib\bootstrap\less\variables.less" />
+    <None Include="wwwroot\lib\bootstrap\less\wells.less" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" />
+    <None Include="wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" />
+    <None Include="wwwroot\lib\bootstrap\nuget\MyGet.ps1" />
+    <None Include="wwwroot\lib\bootstrap\package.js" />
+    <None Include="wwwroot\lib\bootstrap\README.md" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\***">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+ <ItemGroup>
+    <Content Update="Views\***">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+ <ItemGroup>
+   <Folder Include="Upload\" />
+ </ItemGroup>
+ <ItemGroup>
+   <WCFMetadata Include="Connected Services" />
+ </ItemGroup>
+ <ItemGroup>
+   <Content Update="Views\BulkUpload\_ViewStart.cshtml">
+     <Pack>$(IncludeRazorContentInPack)</Pack>
+   </Content>
+   <Content Update="Views\FundTransfer\MultipleTransfer.cshtml">
+     <Pack>$(IncludeRazorContentInPack)</Pack>
+   </Content>
+   <Content Update="Views\FundTransfer\Index.cshtml">
+     <Pack>$(IncludeRazorContentInPack)</Pack>
+   </Content>
+   <Content Update="Views\FundTransfer\_ViewStart.cshtml">
+     <Pack>$(IncludeRazorContentInPack)</Pack>
+   </Content>
+   <Content Update="Views\Reversal\_ViewStart.cshtml">
+     <Pack>$(IncludeRazorContentInPack)</Pack>
+   </Content>
+   <Content Update="wwwroot\MultipleUpload.xlsx">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+</Project>

@@ -1,0 +1,182 @@
+﻿<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">General Upload</small></h4>
+    </div>
+
+    <div class="card-body">
+        <form class="form-inline" method="post" enctype="multipart/form-data" asp-controller="fundtransfer" asp-action="Download">
+
+            <input name="fileName" type="hidden" class="form-control" value="alert.mp3">
+            <button type="submit" id="btnDownload" title="Download!">
+                Dowload Template
+            </button>
+        </form>
+        <hr />
+        <strong>GENERAL UPLOAD</strong>
+        <hr />
+
+
+        <form class="form-inline" >
+
+            <div class="row col-md-12">
+                <div class="file-loading required">
+                    <input id="doctemplate" placeholder="Upload template" autofocus type="file" class="file" />
+                    <div class="invalid-feedback">
+                        Please upload template.
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <button class="btn btn-file" id="BtnUploadTemp" type="submit" value="Save Record">
+                        <i class="now-ui-icons ui-1_simple-add"></i>
+                        Submit Upload
+                    </button>
+                </div>
+
+
+            </div>
+
+            </form>
+            <form asp-action="ImportBulkTransaction" id="uploadTransfer">
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Value Date:</label>
+                            <div class='input-group date'>
+                                <input type="text" id="Transactiondate" class="form-control" required placeholder="Trans.Date">
+                                <span class="input-group-addon">
+                                    @*<span class="fa fa-calendar"></span>*@
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Batch Name:</label>
+                            <input type="text" id="BatchName" class="form-control" required placeholder="Batch Name">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="Id" type="text" hidden />
+                        <label> Process Type:</label>
+                        <br />
+                        <select id="ddlProcessType" name="ddlProcessType" class="form-control" required>
+                            <option value="" selected hidden>Select Process Type ...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ledger Account No/Name:</label>
+                            <br />
+                            <select id="ddlLedgerAccount" name="ddlLedgerAccount" class="form-control" required>
+                                <option value="" selected hidden>Select Ledger Account No/Name ...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Account Name:</label>
+                            <input type="text" class="form-control" required id="Accountname" placeholder="Account Name" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Amount Transfer(&#8358;)</label>
+                            <input type="number" id="Amount" required class="form-control text-right" style="color:green;font-weight:bold" placeholder="0.00" autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Narration</label>
+                            <textarea rows="4" cols="80" id="Narration" required class="form-control" placeholder="Here can be your description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart-toolbar">
+                        <h5>Transaction List</h5>
+                    </div>
+                    <div class="row col-md-offset-10">
+                        @*<div class="col-md-3 ">
+                            <input type="text" class="form-control  text-right" id="TotalDebit" disabled placeholder="Debit Amount">
+                        </div>*@
+                        <div class="col-md-3">
+                            <input type="text" id="TotalCredit" class="form-control text-right" placeholder="Credit Amount">
+                        </div>
+                    </div>
+                    <table id="batchTable" data-toggle="table" class="data-table"
+                           data-url="@Url.Action("listbatchupload", "fundTransfer")"
+                           data-search="true"
+                           data-search-align="right"
+                           data-show-export="true"
+                           data-toolbar="#chart-toolbar"
+                           data-mobile-responsive="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-detail-formatter="detailFormatter"
+                           data-page-list="[5,10,25,50,100,150,200,250,300]"
+                           data-page-size="25"
+                           data-check-on-init="true"
+                           data-pagination="true"
+                           data-click-to-select="true"
+                           data-buttons-class="danger">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="accountNo" data-align="left"><b>Account No.</b></th>
+                                <th data-field="accountName" data-align="left"><b>Account Name</b></th>
+                                <th data-field="amount" data-align="left">Amount</th>
+                                <th data-field="accountBalance" data-align="left">Balance</th>
+                                <th data-field="narration" data-align="left">Narration</th>
+                                <th data-field="batchRef" data-align="left">Batch Ref</th>
+                                <th data-field="stampDuty" data-align="left" data-visible="true">Stamp Charge</th>
+                                <th data-field="" data-align="left" data-events="bulkEvents" data-width="-5%" data-formatter="bulkFormatter">  </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    @*<div class="col-md-6">
+                        <div class="row mb-2">
+                            <label class="col-md-2 col-form-label"></label>
+                            <div class="col-md-10 mb-3">
+                                <div class="form-check pl-0">
+                                    <label class="form-check-label">
+                                        <input name="stampduty" id="stampduty"
+                                               class="form-check-input" type="checkbox">
+                                        <span class="form-check-sign"></span> Stamp Duty
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="col-md-offset-6">
+                        <div class="text-right">
+                            <button class="btn btn-info" id="btnSend" type="button" value="Save Record">
+                                <i class="now-ui-icons ui-1_check"></i>
+                                Transfer Now
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/js/generalupload.js"></script>
+
+
+}

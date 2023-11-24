@@ -1,0 +1,175 @@
+﻿@model TheCoreBanking.Finance.Data.Models.Gllevel
+
+
+
+<div class="card ">
+    <div class="card-header ">
+        <h4 class="card-title text-center"> <small class="description">GL Level</small></h4>
+    </div>
+    <div class="card-body">
+        <div id="level-toolbar">
+            <div class="form-group text-right">
+                <button class="btn btn-info" id="btnAddGLLevel" data-toggle="modal" data-target="#AddNewGLLevel" type="button" value="Add GL Level">
+                    <i class="now-ui-icons ui-1_simple-add"></i>
+                    Add GL Level
+                </button>
+            </div>
+       
+        </div>
+        <table id="GLLevelTable" data-toggle="table" class="data-table"
+               data-url="@Url.Action("listlevel", "financesetup")"
+               data-search="true"
+               data-toolbar="#level-toolbar"
+               data-mobile-responsive="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-show-export="true"
+               data-page-list="[5,10,25,50,100,150,200,250,300]"
+               data-page-size="25"            
+               data-check-on-init="true"               
+               data-detail-formatter="detailFormatter"
+               data-pagination="true"
+               data-buttons-class="danger">
+            <thead>
+                <tr>
+                    <th data-field="levelName" data-sortable="true"><b>Description</b></th>                   
+                   
+                    <th data-field="" data-align="right" data-events="glLevelEvents" data-formatter="glLevelFormatter">  </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div id="AddNewGLLevel" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">ADD NEW GL LEVEL</h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddGLLevel" id="frmGLLevel">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#cost" aria-expanded="true" aria-controls="cost">
+                                    GL Level
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="company" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input asp-for="Id" class="form-control" type="hidden" />
+                                       
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            Level 
+                                            <input asp-for="LevelName" required class="form-control" />
+                                            <span asp-validation-for="LevelName" class="text-danger"></span>
+                                        </div>
+                                       
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                    <hr />
+                    <div class="form-group text-right">
+                     
+
+                        <button class="btn btn-info" id="btnGLLevel" type="submit" value="Save Record">
+                            <i class="now-ui-icons ui-1_check"></i>
+                            Save Record
+                        </button>
+                        <button class="btn btn-danger" type="reset">
+                            <i class="fa fa-recycle"></i>
+                            Clear
+                        </button>
+                    </div>
+
+
+                </form>
+
+            </div>
+          
+        </div>
+
+    </div>
+</div>
+
+<div id="UpdateGLLevel" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"  aria-labelledby="wizardModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                <h7 class="modal-title">UPDATE GL LEVEL</h7>
+            </div>
+            <div class="modal-body">
+                <form asp-action="UpdateGLLevel" id="frmUpdateGLLevel">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                        <div class="card card-plain">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#cost" aria-expanded="true" aria-controls="cost">
+                                    GL Level
+                                    <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                </a>
+                            </div>
+                            <div id="company" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input id="IdUpdate" class="form-control" type="hidden" />
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            Level
+                                            <input id="LevelNameUpdate" required class="form-control" />
+                                          
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr />
+                    <div class="form-group text-right">
+                        <button class="btn btn-info" id="btnGLLevelUpdate" type="submit" value="Update Record">
+                            <i class="now-ui-icons ui-1_check"></i>
+                            Update Record
+                        </button>
+
+                     
+                        <button class="btn btn-danger" type="reset">
+                            <i class="fa fa-recycle"></i>
+                            Clear
+                        </button>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewData["Title"] = "MULTILPLE FUND TRANSFER";
+}
+@section title{
+    @ViewData["Title"]
+}
+
+@section pagedescription{
+    <h5> REVERSAL FUND TRANSFER- OPERATION </h5>
+
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category text-center">REVERSAL FUND TRANSFER- CUSTOMER</h5>
+                    @*<h5 class="card-title">SINGLE FUND TRANSFER</h5>*@
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                            <i class="now-ui-icons loader_gear"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Status for bulk Transfer</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#department">Transaction History</a>
+                            @*<a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item text-danger" href="#">Remove Data</a>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="REVERSAL" id="reversalTransfer">
+                        <strong>CUSTOMER ACCOUNT TRANSACTION</strong>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Transaction Date:</label>
+                                    <div class='input-group date'>
+                                        <input type="text" id="Transactiondate" class="form-control" required placeholder="Trans.Date">
+                                        <span class="input-group-addon">
+                                            @*<span class="fa fa-calendar"></span>*@
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label> Posted By:</label>
+                                    <br />
+                                    <select id="ddlCustomerAccountBulk" name="ddlCustomerAccountBulk" class="form-control" required>
+                                        <option value="" selected hidden>Posted By ...</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-5 required">
+                                <label>Comment:</label>
+                                <br />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <textarea name="comment" id="comment" required class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div id="trans-toolbar">
+                            <div class="form-group text-right">
+                                <button class="btn btn-info" id="btnAddReversalBulk" type="button" value="Reverse Now">
+                                    <i class="now-ui-icons ui-1_simple-add"></i>
+                                    Reverse Customer
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+                        <table id="BulkCustomerTable" data-toggle="table" class="data-table"
+                               data-search="true"
+                               data-show-export="true"
+                               data-minimum-count-columns="2"
+                               data-pagination="true"
+                               data-toolbar="#trans-toolbar"
+                               data-mobile-responsive="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-check-on-init="true"
+                               data-click-to-select="true"
+                               data-single-select="false"
+                               data-detail-formatter="detailFormatter"
+                               data-buttons-class="danger">
+                        </table>
+                        <hr />
+                        <div id="single-toolbar">
+                            <div class="form-group text-right">
+                                <button class="btn btn-info" id="btnAddGLReversal" type="button" value="Reverse Now">
+                                    <i class="now-ui-icons ui-1_simple-add"></i>
+                                    Reverse Ledger
+                                </button>
+                            </div>
+                        </div>
+                        <table id="BulkLedgerTable" data-toggle="table" class="data-table"
+                               data-search="true"
+                               data-show-export="true"
+                               data-minimum-count-columns="2"
+                               data-pagination="true"
+                               data-toolbar="#single-toolbar"
+                               data-mobile-responsive="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-check-on-init="true"
+                               data-click-to-select="true"
+                               data-single-select="false"
+                               data-detail-formatter="detailFormatter"
+                               data-buttons-class="danger">
+                        </table>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="modal fade" id="department" tabindex="-1" role="dialog" aria-labelledby="departmentLabel" aria-hidden="true" data-backdrop="false" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="departmentLabel">Pending Reversed Transactions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="collapseBoard">
+
+                <div class="card card-body">
+
+                    <table id="roleTable" data-toggle="table" class="data-table"
+                           data-url="@Url.Action("ReversalList", "reversal")"
+                           data-search="true"
+                           data-page-list="[5,10,25,50,100,150,200,250,300]"
+                           data-page-size="25"
+                           data-check-on-init="true"
+                           data-pagination="true"
+                           data-search-align="right"
+                           data-toolbar="#role-toolbar"
+                           data-show-pagination-switch="true"
+                           data-mobile-responsive="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-buttons-class="danger">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="accountNo">Acct No</th>
+                                <th data-field="amountReversed">Amount</th>
+                                <th data-field="dateReversed" data-formatter="dateFormatter">Date Reversed</th>
+                                <th data-field="transactionDate" data-formatter="dateFormatter">Trans.Date</th>
+                                <th data-field="postedBy">Posted By</th>
+                                <th data-field="reversedBy">Reversed By</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="~/js/reversal.js"></script>
+
+
+}
+
+
+
+
+
+
